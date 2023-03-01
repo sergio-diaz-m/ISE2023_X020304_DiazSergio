@@ -12,6 +12,7 @@
 
 #include "rl_net.h"                     // Keil.MDK-Pro::Network:CORE
 
+#include "stm32f4xx_hal_msp.h"
 #include "stm32f4xx_hal.h"              // Keil::Device:STM32Cube HAL:Common
 //#include "Board_Buttons.h"              // ::Board Support:Buttons
 //#include "Board_ADC.h"                  // ::Board Support:A/D Converter
@@ -46,10 +47,11 @@ char lcd_text[2][20+1] = { "LCD line 1",
 ///* Thread IDs */
 osThreadId_t TID_Display;
 osThreadId_t TID_Led;
+osThreadId_t TID_Th_RTC;
 
 ///* Thread declarations */
-static void BlinkLed (void *arg);
-static void Display  (void *arg);
+
+static void Th_RTC  (void *arg);
 
 __NO_RETURN void app_main (void *arg);
                            
@@ -68,95 +70,80 @@ uint16_t AD_in (uint32_t ch) {
 //  return ((uint8_t)Buttons_GetState ());
 //}
 
-/* IP address change notification */
-void netDHCP_Notify (uint32_t if_num, uint8_t option, const uint8_t *val, uint32_t len) {
+//*******RTC*******
+RTC_TimeTypeDef timeRTC;
+RTC_DateTypeDef dateRTC;
+RTC_TimeTypeDef currentTime;
+RTC_DateTypeDef currentDate;
+RTC_HandleTypeDef hrtc;
+RTC_TypeDef rtc; 
 
-  (void)if_num;
-  (void)val;
-  (void)len;
-
-  if (option == NET_DHCP_OPTION_IP_ADDRESS) {
-    /* IP address change, trigger LCD update */
-//    osThreadFlagsSet (TID_Display, 0x01);
+	
+void RTC_init(void){
+	
+	HAL_RTC_MspInit(&hrtc);
+	
+  hrtc.Instance = RTC; 
+  hrtc.Init.HourFormat = RTC_HOURFORMAT_24;
+  hrtc.Init.AsynchPrediv = 127;
+  hrtc.Init.SynchPrediv = 255;
+  hrtc.Init.OutPut = RTC_OUTPUT_DISABLE;
+  hrtc.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
+  hrtc.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
+	__HAL_RTC_RESET_HANDLE_STATE(&hrtc);
+  if (HAL_RTC_Init(&hrtc) != HAL_OK) {
+    // Handle error return -1
   }
+	
 }
 
-/*----------------------------------------------------------------------------
-  Thread 'Display': LCD display handler
- *---------------------------------------------------------------------------*/
-static __NO_RETURN void Display (void *arg) {
-  static uint8_t ip_addr[NET_ADDR_IP6_LEN];
-  static char    ip_ascii[40];
-  static char    buf[24];
-  uint32_t x = 0;
-
-  (void)arg;
-  LCD_reset();
-  osDelay(50);
-  LCD_init();
-//  GLCD_Initialize         ();
-//  GLCD_SetBackgroundColor (GLCD_COLOR_BLUE);
-//  GLCD_SetForegroundColor (GLCD_COLOR_WHITE);
-//  GLCD_ClearScreen        ();
-//  GLCD_SetFont            (&GLCD_Font_16x24);
-//  GLCD_DrawString         (x*16U, 1U*24U, "       MDK-MW       ");
-//  GLCD_DrawString         (x*16U, 2U*24U, "HTTP Server example ");
-  writeLCD("HTTP Server example",1);
-//  GLCD_DrawString (x*16U, 4U*24U, "IP4:Waiting for DHCP");
-
-  /* Print Link-local IPv6 address */
-//  netIF_GetOption (NET_IF_CLASS_ETH,
-//                   netIF_OptionIP6_LinkLocalAddress, ip_addr, sizeof(ip_addr));
-
-//  netIP_ntoa(NET_ADDR_IP6, ip_addr, ip_ascii, sizeof(ip_ascii));
-
-//  sprintf (buf, "IP6:%.16s", ip_ascii);
-//  GLCD_DrawString ( x    *16U, 5U*24U, buf);
-//  sprintf (buf, "%s", ip_ascii+16);
-//  GLCD_DrawString ((x+10U)*16U, 6U*24U, buf);
-    netIF_GetOption (NET_IF_CLASS_ETH,
-                     netIF_OptionIP4_Address, ip_addr, sizeof(ip_addr));
-
-    netIP_ntoa (NET_ADDR_IP4, ip_addr, ip_ascii, sizeof(ip_ascii));
-
-    sprintf (buf, "IP4:%-16s",ip_ascii);
-    writeLCD(buf,2);
-  while(1) {
-    /* Wait for signal from DHCP */
-
-
-    /* Retrieve and print IPv4 address */
-
-    
-   osThreadFlagsWait (0x01U, osFlagsWaitAny, osWaitForever);
-    /* Display user text lines */
-    flush_buffer();
-    osDelay(50);
-    sprintf (buf, "%-20s", lcd_text[0]);
-    writeLCD(buf,1);
-    
-    sprintf (buf, "%-20s", lcd_text[1]);
-    writeLCD(buf,2);
-  }
-}
 
 ///*----------------------------------------------------------------------------
-//  Thread 'BlinkLed': Blink the LEDs on an eval board
+//  Thread 'RTC': Set and get RTC date and time periodically
 // *---------------------------------------------------------------------------*/
-static __NO_RETURN void BlinkLed (void *arg) {
-  const uint8_t led_val[5] = { 0x00,0x01,0x02,0x04,0x10 };
-  (void)arg;
-  uint32_t cnt=0U;
-  LEDrun = true;
+static __NO_RETURN void Th_RTC (void *arg) {
+	LCD_reset();
+  osDelay(50);
+  LCD_init();
+	
+	RTC_init();
+	
+	//Set time 00:00:00
+	static char showtime[25];
+	static char showdate[25];
+	
+	timeRTC.Seconds=0x10;
+	timeRTC.Minutes=0x10;
+	timeRTC.Hours=0x10;
+	timeRTC.TimeFormat = RTC_HOURFORMAT12_AM;
+	timeRTC.DayLightSaving=RTC_DAYLIGHTSAVING_NONE; //no DST
+  timeRTC.StoreOperation = RTC_STOREOPERATION_RESET;
+  if (HAL_RTC_SetTime(&hrtc, &timeRTC, RTC_FORMAT_BCD) != HAL_OK) {
+    //Error handle
+  }
+	//Set date 01 jan MON
+	dateRTC.WeekDay = RTC_WEEKDAY_TUESDAY;
+  dateRTC.Month = RTC_MONTH_JUNE;
+  dateRTC.Date = 0x10;
+  dateRTC.Year = 0x0;
+  if (HAL_RTC_SetDate(&hrtc, &dateRTC, RTC_FORMAT_BCD) != HAL_OK) {
+    //Error handle
+  }
   while(1) {
-    /* Every 100 ms */
-    if (LEDrun == true) {
-      LED_Toggle (led_val[cnt]);
-      if (++cnt >= sizeof(led_val)) {
-        cnt = 0U;
-      }
-    }
-    osDelay (100);
+
+   if (HAL_RTC_GetTime(&hrtc, &currentTime, RTC_FORMAT_BIN) != HAL_OK) {
+    //Error handle
+   }
+	 if (HAL_RTC_GetDate(&hrtc, &currentDate, RTC_FORMAT_BIN) != HAL_OK) {
+		//Error handle
+   }
+	  
+	  sprintf(showtime, "     %02d:%02d:%02d", currentTime.Hours, currentTime.Minutes, currentTime.Seconds);
+		writeLCD(showtime,1);
+		/* Display date Format : mm-dd-yy */
+		sprintf(showdate, "    %02d-%02d-%2d", currentDate.Date, currentDate.Month, 2000 + currentDate.Year);
+		writeLCD(showdate,2);
+    osDelay (1000); //Every 3 mins
   }
 }
 
@@ -169,15 +156,14 @@ __NO_RETURN void app_main (void *arg) {
   LED_Initialize();
 //  Buttons_Initialize();
 //  ADC_Initialize();
-  
+  	
   ADC1_pins_F429ZI_config(); //specific PINS configuration
   
   ADC_Init_Single_Conversion(&adchandle , ADC1);
   
   netInitialize ();
 
-  TID_Led     = osThreadNew (BlinkLed, NULL, NULL);
-  TID_Display = osThreadNew (Display,  NULL, NULL);
+	TID_Th_RTC  = osThreadNew (Th_RTC,  NULL, NULL);
 
   osThreadExit();
 }

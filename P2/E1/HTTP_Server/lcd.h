@@ -6,5 +6,5 @@
   void LCD_init (void);
   void writeLCD (char * str, int line);
   void flush_buffer (void);
-
+  void flush_half_buffer (void);
 #endif

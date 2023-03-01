@@ -228,3 +228,7 @@ void flush_buffer (void)
 {
   ft_memset(buffer, 0, sizeof(buffer));
 }
+void flush_half_buffer (void)
+{
+  ft_memset(buffer, 0, sizeof(buffer)/2);
+}
