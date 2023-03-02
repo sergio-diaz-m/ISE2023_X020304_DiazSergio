@@ -36,12 +36,12 @@
 /* Private functions ---------------------------------------------------------*/
 
  //*******RTC init*******
-RTC_TimeTypeDef timeRTC;
-RTC_DateTypeDef dateRTC;
-RTC_TimeTypeDef currentTime;
-RTC_DateTypeDef currentDate;
-RTC_HandleTypeDef hrtc;
-RTC_TypeDef rtc; 
+static RTC_TimeTypeDef timeRTC;
+static RTC_DateTypeDef dateRTC;
+static RTC_TimeTypeDef currentTime;
+static RTC_DateTypeDef currentDate;
+static RTC_HandleTypeDef hrtc;
+static RTC_TypeDef rtc; 
 
   
 void RTC_init(void){
