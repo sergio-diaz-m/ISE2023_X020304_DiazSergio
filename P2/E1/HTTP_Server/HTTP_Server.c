@@ -75,10 +75,49 @@ RTC_TimeTypeDef timeRTC;
 RTC_DateTypeDef dateRTC;
 RTC_TimeTypeDef currentTime;
 RTC_DateTypeDef currentDate;
+RTC_AlarmTypeDef sAlarm;
 RTC_HandleTypeDef hrtc;
 RTC_TypeDef rtc; 
 
+uint8_t alarm;
+
+void alarm_ledsBlink(void){
+	uint8_t i;
+	for(i=0; i<12; i++){
+		HAL_GPIO_TogglePin(GPIOB,GPIO_PIN_0);
+		osDelay(500);
+	}
+	alarm=0;
+}
+
+void RTC_Alarm_IRQHandler(void) {
+  HAL_RTC_AlarmIRQHandler(&hrtc);
+}
+
+void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc){
+
+	RTC_TimeTypeDef sTime;
+	HAL_RTC_GetTime(hrtc, &sTime, RTC_FORMAT_BIN);
+	uint8_t next_min = sTime.Minutes++;
+	if (next_min > 59) next_min = 0;
 	
+	//Alarm goes off every minute blinking led during 5 seconds
+	sAlarm.AlarmTime.Hours = 0x00; //Masked
+	sAlarm.AlarmTime.Minutes = RTC_ByteToBcd2(next_min);
+	sAlarm.AlarmTime.Seconds = RTC_ByteToBcd2(sTime.Seconds);
+	sAlarm.AlarmTime.TimeFormat = RTC_HOURFORMAT12_AM;
+	sAlarm.AlarmTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
+	sAlarm.AlarmTime.StoreOperation = RTC_STOREOPERATION_SET;
+	sAlarm.AlarmMask = RTC_ALARMMASK_DATEWEEKDAY|RTC_ALARMMASK_HOURS|RTC_ALARMMASK_MINUTES;
+	sAlarm.AlarmDateWeekDaySel = RTC_ALARMDATEWEEKDAYSEL_DATE;
+	sAlarm.AlarmDateWeekDay = 1;
+	sAlarm.Alarm = RTC_ALARM_A;
+
+	HAL_RTC_SetAlarm_IT(hrtc, &sAlarm, RTC_FORMAT_BCD);
+	
+	alarm=1;
+}
+
 void RTC_init(void){
 	
 	HAL_RTC_MspInit(&hrtc);
@@ -121,6 +160,23 @@ static __NO_RETURN void Th_RTC (void *arg) {
 	timeRTC.TimeFormat = RTC_HOURFORMAT12_AM;
 	timeRTC.DayLightSaving=RTC_DAYLIGHTSAVING_NONE; //no DST
   timeRTC.StoreOperation = RTC_STOREOPERATION_RESET;
+	
+	//Set alarm A to go off every minute
+	sAlarm.AlarmTime.Hours = 0x00; //masked
+  sAlarm.AlarmTime.Minutes = timeRTC.Minutes+0x01;
+  sAlarm.AlarmTime.Seconds = timeRTC.Seconds;
+  sAlarm.AlarmTime.TimeFormat = RTC_HOURFORMAT12_AM;
+  sAlarm.AlarmTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
+  sAlarm.AlarmTime.StoreOperation = RTC_STOREOPERATION_RESET;
+  sAlarm.AlarmMask = RTC_ALARMMASK_DATEWEEKDAY|RTC_ALARMMASK_HOURS;
+  sAlarm.AlarmDateWeekDaySel = RTC_ALARMDATEWEEKDAYSEL_DATE;
+  sAlarm.AlarmDateWeekDay = 1;
+  sAlarm.Alarm = RTC_ALARM_A;
+  HAL_RTC_SetAlarm_IT(&hrtc, &sAlarm, RTC_FORMAT_BCD);
+	HAL_NVIC_EnableIRQ(RTC_Alarm_IRQn);
+
+
+		
   if (HAL_RTC_SetTime(&hrtc, &timeRTC, RTC_FORMAT_BCD) != HAL_OK) {
     //Error handle
   }
@@ -140,6 +196,8 @@ static __NO_RETURN void Th_RTC (void *arg) {
 	 if (HAL_RTC_GetDate(&hrtc, &currentDate, RTC_FORMAT_BIN) != HAL_OK) {
 		//Error handle
    }
+	 
+
 	  
 	 //Display on LCDs
 	  sprintf(showtime, "     %02d:%02d:%02d", currentTime.Hours, currentTime.Minutes, currentTime.Seconds);
@@ -149,10 +207,19 @@ static __NO_RETURN void Th_RTC (void *arg) {
 		writeLCD(showdate,2);
 	 
 	 //Set clock refresh rate in ms
-    osDelay (1000); //Every 3 mins
+    osDelay (100);
   }
 }
-
+///*----------------------------------------------------------------------------
+//  Thread 'BlinkLed': Blink the LEDs on an eval board
+// *---------------------------------------------------------------------------*/
+static __NO_RETURN void BlinkLed (void *arg) {
+  while(1) {
+		if(alarm){
+			alarm_ledsBlink();
+		}
+  }
+}
 /*----------------------------------------------------------------------------
   Main Thread 'main': Run Network
  *---------------------------------------------------------------------------*/
@@ -170,6 +237,7 @@ __NO_RETURN void app_main (void *arg) {
   netInitialize ();
 
 	TID_Th_RTC  = osThreadNew (Th_RTC,  NULL, NULL);
+	TID_Led  = osThreadNew (BlinkLed,  NULL, NULL);
 
   osThreadExit();
 }
