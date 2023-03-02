@@ -102,12 +102,15 @@ void RTC_init(void){
 //  Thread 'RTC': Set and get RTC date and time periodically
 // *---------------------------------------------------------------------------*/
 static __NO_RETURN void Th_RTC (void *arg) {
+	//LCD init to display on screen
 	LCD_reset();
   osDelay(50);
   LCD_init();
 	
+	// RTC init 
 	RTC_init();
 	
+	//RTC config 
 	//Set time 00:00:00
 	static char showtime[25];
 	static char showdate[25];
@@ -138,11 +141,14 @@ static __NO_RETURN void Th_RTC (void *arg) {
 		//Error handle
    }
 	  
+	 //Display on LCDs
 	  sprintf(showtime, "     %02d:%02d:%02d", currentTime.Hours, currentTime.Minutes, currentTime.Seconds);
 		writeLCD(showtime,1);
 		/* Display date Format : mm-dd-yy */
 		sprintf(showdate, "    %02d-%02d-%2d", currentDate.Date, currentDate.Month, 2000 + currentDate.Year);
 		writeLCD(showdate,2);
+	 
+	 //Set clock refresh rate in ms
     osDelay (1000); //Every 3 mins
   }
 }
