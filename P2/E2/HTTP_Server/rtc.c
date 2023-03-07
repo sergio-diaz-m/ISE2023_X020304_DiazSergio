@@ -166,7 +166,7 @@ void setTime(uint8_t Hours, uint8_t Minutes, uint8_t Seconds, uint8_t AM_PM, uin
       timeRTC.StoreOperation = RTC_STOREOPERATION_RESET;
   }
   
-  if (HAL_RTC_SetTime(&hrtc, &timeRTC, RTC_FORMAT_BCD) != HAL_OK) {
+  if (HAL_RTC_SetTime(&hrtc, &timeRTC, RTC_FORMAT_BIN) != HAL_OK) {
     //Error handle
   }
 }
@@ -179,7 +179,7 @@ void setDate(uint8_t day, uint8_t month, uint16_t year, uint8_t weekday){
   dateRTC.Month = month;
   dateRTC.Year = year-2000;
 	
-	if (HAL_RTC_SetDate(&hrtc, &dateRTC, RTC_FORMAT_BCD) != HAL_OK) {
+	if (HAL_RTC_SetDate(&hrtc, &dateRTC, RTC_FORMAT_BIN) != HAL_OK) {
     //Error handle
   }
 }

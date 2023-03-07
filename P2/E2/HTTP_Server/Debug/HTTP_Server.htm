@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Debug\HTTP_Server.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Debug\HTTP_Server.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Thu Mar 02 11:52:04 2023
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Tue Mar 07 11:42:43 2023
 <BR><P>
 <H3>Maximum Stack Usage =        320 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -547,8 +547,6 @@ Global Symbols
 <LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_ADC_PollForConversion
 <LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_OscConfig
 <LI><a href="#[121]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_ClockConfig
-<LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PHY_Write
-<LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PHY_Read
 <LI><a href="#[347]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RTCEx_PollForAlarmBEvent
 <LI><a href="#[344]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RTCEx_SetSynchroShift
 <LI><a href="#[343]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RTCEx_SetSmoothCalib
@@ -575,6 +573,8 @@ Global Symbols
 <LI><a href="#[30a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Abort
 <LI><a href="#[300]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_ADC_PollForEvent
 <LI><a href="#[2fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
+<LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PHY_Write
+<LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PHY_Read
 </UL>
 
 <P><STRONG><a name="[64]"></a>main</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, main.o(.text))
@@ -610,7 +610,7 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> main.o(.text)
 </UL>
 <P><STRONG><a name="[137]"></a>netCGI_ProcessQuery</STRONG> (Thumb, 204 bytes, Stack size 64 bytes, http_server_cgi.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 176<LI>Call Chain = netCGI_ProcessQuery &rArr; netIF_SetOption &rArr; net_sys_unlock &rArr; netos_unlock &rArr; osMutexRelease &rArr; EvrRtxMutexError &rArr; EventRecord2 &rArr; EventRecordItem
+<BR><BR>[Stack]<UL><LI>Max Depth = 176<LI>Call Chain = netCGI_ProcessQuery &rArr; netIF_SetOption &rArr; net_sys_unlock &rArr; netos_unlock &rArr; osMutexRelease &rArr; EvrRtxMutexRelease &rArr; EventRecord2 &rArr; EventRecordItem
 </UL>
 <BR>[Calls]<UL><LI><a href="#[139]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;netIP_aton
 <LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;netIF_SetOption
@@ -2723,38 +2723,38 @@ Global Symbols
 <P><STRONG><a name="[27e]"></a>osMutexNew</STRONG> (Thumb, 46 bytes, Stack size 8 bytes, rtx_mutex.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = osMutexNew &rArr; EvrRtxMutexNew &rArr; EventRecord2 &rArr; EventRecordItem
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexNew
-<LI><a href="#[1eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexError
-<LI><a href="#[280]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsIrqMasked
+<BR>[Calls]<UL><LI><a href="#[280]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsIrqMasked
 <LI><a href="#[27f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsException
+<LI><a href="#[1ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexNew
+<LI><a href="#[1eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexError
 </UL>
 <BR>[Called By]<UL><LI><a href="#[3c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;netos_mutex_create
 </UL>
 
 <P><STRONG><a name="[281]"></a>osMutexGetName</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, rtx_mutex.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[1ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexGetName
-<LI><a href="#[280]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsIrqMasked
+<BR><BR>[Calls]<UL><LI><a href="#[280]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsIrqMasked
 <LI><a href="#[27f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsException
+<LI><a href="#[1ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexGetName
 </UL>
 
 <P><STRONG><a name="[282]"></a>osMutexAcquire</STRONG> (Thumb, 54 bytes, Stack size 16 bytes, rtx_mutex.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = osMutexAcquire &rArr; EvrRtxMutexAcquire &rArr; EventRecord2 &rArr; EventRecordItem
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexAcquire
-<LI><a href="#[1eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexError
-<LI><a href="#[280]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsIrqMasked
+<BR>[Calls]<UL><LI><a href="#[280]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsIrqMasked
 <LI><a href="#[27f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsException
+<LI><a href="#[1ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexAcquire
+<LI><a href="#[1eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexError
 </UL>
 <BR>[Called By]<UL><LI><a href="#[3cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;netos_lock
 </UL>
 
 <P><STRONG><a name="[283]"></a>osMutexRelease</STRONG> (Thumb, 48 bytes, Stack size 16 bytes, rtx_mutex.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = osMutexRelease &rArr; EvrRtxMutexError &rArr; EventRecord2 &rArr; EventRecordItem
+<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = osMutexRelease &rArr; EvrRtxMutexRelease &rArr; EventRecord2 &rArr; EventRecordItem
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexError
-<LI><a href="#[280]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsIrqMasked
+<BR>[Calls]<UL><LI><a href="#[280]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsIrqMasked
 <LI><a href="#[27f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsException
 <LI><a href="#[1f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexRelease
+<LI><a href="#[1eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexError
 </UL>
 <BR>[Called By]<UL><LI><a href="#[3cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;netos_unlock
 </UL>
@@ -2766,10 +2766,10 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[285]"></a>osMutexDelete</STRONG> (Thumb, 48 bytes, Stack size 16 bytes, rtx_mutex.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[1eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexError
-<LI><a href="#[280]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsIrqMasked
+<BR><BR>[Calls]<UL><LI><a href="#[280]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsIrqMasked
 <LI><a href="#[27f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsException
 <LI><a href="#[1f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexDelete
+<LI><a href="#[1eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexError
 </UL>
 <BR>[Called By]<UL><LI><a href="#[3ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;netos_mutex_delete
 </UL>
@@ -2949,11 +2949,9 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[23d]"></a>osRtxThreadDelayTick</STRONG> (Thumb, 206 bytes, Stack size 16 bytes, rtx_thread.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = osRtxThreadDelayTick &rArr; EvrRtxDelayCompleted &rArr; EventRecord2 &rArr; EventRecordItem
+<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = osRtxThreadDelayTick &rArr; EvrRtxThreadUnblocked &rArr; EventRecord2 &rArr; EventRecordItem
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxDelayCompleted
-<LI><a href="#[1cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsWaitTimeout
-<LI><a href="#[1bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadUnblocked
+<BR>[Calls]<UL><LI><a href="#[1bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadUnblocked
 <LI><a href="#[298]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxThreadListRemove
 <LI><a href="#[1e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxEventFlagsWaitTimeout
 <LI><a href="#[2a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxThreadListRoot
@@ -2965,6 +2963,8 @@ Global Symbols
 <LI><a href="#[20d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMemoryPoolAllocTimeout
 <LI><a href="#[1ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxSemaphoreAcquireTimeout
 <LI><a href="#[1f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexAcquireTimeout
+<LI><a href="#[1ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxDelayCompleted
+<LI><a href="#[1cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsWaitTimeout
 </UL>
 <BR>[Called By]<UL><LI><a href="#[17b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxTick_Handler
 <LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;svcRtxKernelResume
@@ -3197,13 +3197,13 @@ Global Symbols
 <P><STRONG><a name="[141]"></a>osThreadFlagsSet</STRONG> (Thumb, 112 bytes, Stack size 16 bytes, rtx_thread.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = osThreadFlagsSet &rArr; osRtxPostProcess &rArr; osRtxKernelErrorNotify &rArr; EvrRtxKernelErrorNotify &rArr; EventRecord2 &rArr; EventRecordItem
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsSetDone
-<LI><a href="#[1c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsSet
-<LI><a href="#[1c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsError
-<LI><a href="#[261]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxPostProcess
+<BR>[Calls]<UL><LI><a href="#[261]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxPostProcess
 <LI><a href="#[2aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsIrqMasked
 <LI><a href="#[2a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsException
 <LI><a href="#[29a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ThreadFlagsSet
+<LI><a href="#[1c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsSetDone
+<LI><a href="#[1c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsSet
+<LI><a href="#[1c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsError
 </UL>
 <BR>[Called By]<UL><LI><a href="#[13b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;netCGI_ProcessData
 <LI><a href="#[3ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;netos_flag_set
@@ -3212,27 +3212,27 @@ Global Symbols
 <P><STRONG><a name="[2ba]"></a>osThreadFlagsClear</STRONG> (Thumb, 48 bytes, Stack size 8 bytes, rtx_thread.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = osThreadFlagsClear &rArr; EvrRtxThreadFlagsClear &rArr; EventRecord2 &rArr; EventRecordItem
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsClear
-<LI><a href="#[1c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsError
-<LI><a href="#[2aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsIrqMasked
+<BR>[Calls]<UL><LI><a href="#[2aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsIrqMasked
 <LI><a href="#[2a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsException
+<LI><a href="#[1c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsClear
+<LI><a href="#[1c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsError
 </UL>
 <BR>[Called By]<UL><LI><a href="#[3cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;netos_flag_clear
 </UL>
 
 <P><STRONG><a name="[2bb]"></a>osThreadFlagsGet</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, rtx_thread.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[1c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsGet
-<LI><a href="#[2aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsIrqMasked
+<BR><BR>[Calls]<UL><LI><a href="#[2aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsIrqMasked
 <LI><a href="#[2a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsException
+<LI><a href="#[1c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsGet
 </UL>
 
 <P><STRONG><a name="[2bc]"></a>osThreadFlagsWait</STRONG> (Thumb, 60 bytes, Stack size 16 bytes, rtx_thread.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = osThreadFlagsWait &rArr; EvrRtxThreadFlagsWait &rArr; EventRecord4 &rArr; EventRecordItem
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsWait
-<LI><a href="#[1c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsError
-<LI><a href="#[2aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsIrqMasked
+<BR>[Calls]<UL><LI><a href="#[2aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsIrqMasked
 <LI><a href="#[2a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsException
+<LI><a href="#[1c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsWait
+<LI><a href="#[1c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsError
 </UL>
 <BR>[Called By]<UL><LI><a href="#[3cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;netos_flag_wait
 </UL>
@@ -3247,57 +3247,57 @@ Global Symbols
 <P><STRONG><a name="[112]"></a>osRtxTimerThread</STRONG> (Thumb, 40 bytes, Stack size 16 bytes, rtx_timer.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = osRtxTimerThread &rArr; osMessageQueueGet &rArr; osRtxPostProcess &rArr; osRtxKernelErrorNotify &rArr; EvrRtxKernelErrorNotify &rArr; EventRecord2 &rArr; EventRecordItem
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerCallback
-<LI><a href="#[274]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMessageQueueGet
+<BR>[Calls]<UL><LI><a href="#[274]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMessageQueueGet
+<LI><a href="#[1d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerCallback
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> rtx_lib.o(.rodata)
 </UL>
 <P><STRONG><a name="[2c0]"></a>osTimerNew</STRONG> (Thumb, 66 bytes, Stack size 24 bytes, rtx_timer.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = osTimerNew &rArr; EvrRtxTimerNew &rArr; EventRecord4 &rArr; EventRecordItem
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerNew
-<LI><a href="#[1cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerError
-<LI><a href="#[2c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsIrqMasked
+<BR>[Calls]<UL><LI><a href="#[2c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsIrqMasked
 <LI><a href="#[2c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsException
+<LI><a href="#[1d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerNew
+<LI><a href="#[1cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerError
 </UL>
 <BR>[Called By]<UL><LI><a href="#[3c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;netos_timer_create
 </UL>
 
 <P><STRONG><a name="[2c3]"></a>osTimerGetName</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, rtx_timer.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[1d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerGetName
-<LI><a href="#[2c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsIrqMasked
+<BR><BR>[Calls]<UL><LI><a href="#[2c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsIrqMasked
 <LI><a href="#[2c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsException
+<LI><a href="#[1d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerGetName
 </UL>
 
 <P><STRONG><a name="[2c4]"></a>osTimerStart</STRONG> (Thumb, 54 bytes, Stack size 16 bytes, rtx_timer.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = osTimerStart &rArr; EvrRtxTimerStart &rArr; EventRecord2 &rArr; EventRecordItem
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerStart
-<LI><a href="#[1cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerError
-<LI><a href="#[2c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsIrqMasked
+<BR>[Calls]<UL><LI><a href="#[2c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsIrqMasked
 <LI><a href="#[2c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsException
+<LI><a href="#[1d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerStart
+<LI><a href="#[1cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerError
 </UL>
 <BR>[Called By]<UL><LI><a href="#[3c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;netos_timer_start
 </UL>
 
 <P><STRONG><a name="[2c5]"></a>osTimerStop</STRONG> (Thumb, 72 bytes, Stack size 16 bytes, rtx_timer.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[1d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerStop
-<LI><a href="#[1cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerError
-<LI><a href="#[2c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsIrqMasked
+<BR><BR>[Calls]<UL><LI><a href="#[2c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsIrqMasked
 <LI><a href="#[2c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsException
+<LI><a href="#[1d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerStop
+<LI><a href="#[1cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerError
 </UL>
 
 <P><STRONG><a name="[2c6]"></a>osTimerIsRunning</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, rtx_timer.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[1d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerIsRunning
-<LI><a href="#[2c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsIrqMasked
+<BR><BR>[Calls]<UL><LI><a href="#[2c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsIrqMasked
 <LI><a href="#[2c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsException
+<LI><a href="#[1d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerIsRunning
 </UL>
 
 <P><STRONG><a name="[2c7]"></a>osTimerDelete</STRONG> (Thumb, 48 bytes, Stack size 16 bytes, rtx_timer.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[1d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerDelete
-<LI><a href="#[1cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerError
-<LI><a href="#[2c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsIrqMasked
+<BR><BR>[Calls]<UL><LI><a href="#[2c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsIrqMasked
 <LI><a href="#[2c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsException
+<LI><a href="#[1d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerDelete
+<LI><a href="#[1cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerError
 </UL>
 <BR>[Called By]<UL><LI><a href="#[3c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;netos_timer_delete
 </UL>
@@ -3480,32 +3480,7 @@ Global Symbols
 <LI><a href="#[2e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EventGetTS
 <LI><a href="#[2e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EventRecordItem
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexAcquire
-<LI><a href="#[1ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexGetName
-<LI><a href="#[1ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexCreated
-<LI><a href="#[1ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexNew
-<LI><a href="#[1eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexError
-<LI><a href="#[1da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerDestroyed
-<LI><a href="#[1d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerDelete
-<LI><a href="#[1d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerIsRunning
-<LI><a href="#[1d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerStopped
-<LI><a href="#[1d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerStop
-<LI><a href="#[1d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerStarted
-<LI><a href="#[1d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerStart
-<LI><a href="#[1d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerGetName
-<LI><a href="#[1d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerCreated
-<LI><a href="#[1d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerCallback
-<LI><a href="#[1cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerError
-<LI><a href="#[1ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxDelayCompleted
-<LI><a href="#[1cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsWaitNotCompleted
-<LI><a href="#[1cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsWaitTimeout
-<LI><a href="#[1c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsGet
-<LI><a href="#[1c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsClearDone
-<LI><a href="#[1c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsClear
-<LI><a href="#[1c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsSetDone
-<LI><a href="#[1c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsSet
-<LI><a href="#[1c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsError
-<LI><a href="#[1c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadGetCount
+<BR>[Called By]<UL><LI><a href="#[1c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadGetCount
 <LI><a href="#[1c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadDestroyed
 <LI><a href="#[1bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadTerminate
 <LI><a href="#[1be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadExit
@@ -3670,6 +3645,31 @@ Global Symbols
 <LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexAcquired
 <LI><a href="#[1f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexAcquireTimeout
 <LI><a href="#[1f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexAcquirePending
+<LI><a href="#[1ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexAcquire
+<LI><a href="#[1ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexGetName
+<LI><a href="#[1ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexCreated
+<LI><a href="#[1ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexNew
+<LI><a href="#[1eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexError
+<LI><a href="#[1da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerDestroyed
+<LI><a href="#[1d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerDelete
+<LI><a href="#[1d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerIsRunning
+<LI><a href="#[1d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerStopped
+<LI><a href="#[1d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerStop
+<LI><a href="#[1d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerStarted
+<LI><a href="#[1d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerStart
+<LI><a href="#[1d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerGetName
+<LI><a href="#[1d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerCreated
+<LI><a href="#[1d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerCallback
+<LI><a href="#[1cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerError
+<LI><a href="#[1ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxDelayCompleted
+<LI><a href="#[1cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsWaitNotCompleted
+<LI><a href="#[1cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsWaitTimeout
+<LI><a href="#[1c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsGet
+<LI><a href="#[1c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsClearDone
+<LI><a href="#[1c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsClear
+<LI><a href="#[1c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsSetDone
+<LI><a href="#[1c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsSet
+<LI><a href="#[1c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsError
 <LI><a href="#[490]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;net_ip4_send_frame
 <LI><a href="#[491]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;net_icmp_send_echo
 <LI><a href="#[49b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;net_ip6_init
@@ -3721,11 +3721,7 @@ Global Symbols
 <LI><a href="#[2e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EventGetTS
 <LI><a href="#[2e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EventRecordItem
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerNew
-<LI><a href="#[1cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsWaitCompleted
-<LI><a href="#[1ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsWaitPending
-<LI><a href="#[1c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsWait
-<LI><a href="#[1c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadEnumerate
+<BR>[Called By]<UL><LI><a href="#[1c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadEnumerate
 <LI><a href="#[1a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadNew
 <LI><a href="#[190]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxKernelGetInfo
 <LI><a href="#[18c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMemoryBlockFree
@@ -3745,6 +3741,10 @@ Global Symbols
 <LI><a href="#[21a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMessageQueueNew
 <LI><a href="#[208]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMemoryPoolNew
 <LI><a href="#[1fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxSemaphoreNew
+<LI><a href="#[1d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerNew
+<LI><a href="#[1cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsWaitCompleted
+<LI><a href="#[1ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsWaitPending
+<LI><a href="#[1c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsWait
 <LI><a href="#[3f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;net_mem_free
 <LI><a href="#[3f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;net_mem_alloc
 </UL>
@@ -4042,10 +4042,7 @@ Global Symbols
 <P><STRONG><a name="[308]"></a>HAL_DMA_Start_IT</STRONG> (Thumb, 108 bytes, Stack size 24 bytes, stm32f4xx_hal_dma.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[316]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_SetConfig
 </UL>
-<BR>[Called By]<UL><LI><a href="#[365]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_Start_DMA
-<LI><a href="#[35b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_Start_DMA
-<LI><a href="#[34e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Start_DMA
-<LI><a href="#[30c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_ADCEx_MultiModeStart_DMA
+<BR>[Called By]<UL><LI><a href="#[30c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_ADCEx_MultiModeStart_DMA
 <LI><a href="#[307]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_ADC_Start_DMA
 <LI><a href="#[3b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIMEx_PWMN_Start_DMA
 <LI><a href="#[3b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIMEx_OCN_Start_DMA
@@ -4054,6 +4051,9 @@ Global Symbols
 <LI><a href="#[397]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_DMABurst_WriteStart
 <LI><a href="#[383]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Encoder_Start_DMA
 <LI><a href="#[371]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_IC_Start_DMA
+<LI><a href="#[365]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_Start_DMA
+<LI><a href="#[35b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_Start_DMA
+<LI><a href="#[34e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Start_DMA
 </UL>
 
 <P><STRONG><a name="[30a]"></a>HAL_DMA_Abort</STRONG> (Thumb, 140 bytes, Stack size 24 bytes, stm32f4xx_hal_dma.o(.text), UNUSED)
@@ -4065,10 +4065,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[2d3]"></a>HAL_DMA_Abort_IT</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, stm32f4xx_hal_dma.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[366]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_Stop_DMA
-<LI><a href="#[35c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_Stop_DMA
-<LI><a href="#[34f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Stop_DMA
-<LI><a href="#[2d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Control
+<BR><BR>[Called By]<UL><LI><a href="#[2d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Control
 <LI><a href="#[3ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIMEx_PWMN_Stop_DMA
 <LI><a href="#[3b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIMEx_OCN_Stop_DMA
 <LI><a href="#[3ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIMEx_HallSensor_Stop_DMA
@@ -4076,6 +4073,9 @@ Global Symbols
 <LI><a href="#[398]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_DMABurst_WriteStop
 <LI><a href="#[384]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Encoder_Stop_DMA
 <LI><a href="#[372]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_IC_Stop_DMA
+<LI><a href="#[366]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_Stop_DMA
+<LI><a href="#[35c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_Stop_DMA
+<LI><a href="#[34f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Stop_DMA
 </UL>
 
 <P><STRONG><a name="[317]"></a>HAL_DMA_PollForTransfer</STRONG> (Thumb, 296 bytes, Stack size 40 bytes, stm32f4xx_hal_dma.o(.text), UNUSED)
@@ -4109,9 +4109,9 @@ Global Symbols
 <P><STRONG><a name="[2ce]"></a>HAL_GPIO_DeInit</STRONG> (Thumb, 300 bytes, Stack size 36 bytes, stm32f4xx_hal_gpio.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = HAL_GPIO_DeInit
 </UL>
-<BR>[Called By]<UL><LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uninitialize
-<LI><a href="#[2d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Uninitialize
+<BR>[Called By]<UL><LI><a href="#[2d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Uninitialize
 <LI><a href="#[2d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Control
+<LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uninitialize
 </UL>
 
 <P><STRONG><a name="[522]"></a>HAL_GPIO_ReadPin</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, stm32f4xx_hal_gpio.o(.text), UNUSED)
@@ -4215,9 +4215,9 @@ Global Symbols
 <P><STRONG><a name="[533]"></a>HAL_RCC_DisableCSS</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, stm32f4xx_hal_rcc.o(.text), UNUSED)
 
 <P><STRONG><a name="[2cf]"></a>HAL_RCC_GetHCLKFreq</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f4xx_hal_rcc.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PowerControl
-<LI><a href="#[31f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetPCLK1Freq
+<BR><BR>[Called By]<UL><LI><a href="#[31f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetPCLK1Freq
 <LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetPCLK2Freq
+<LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PowerControl
 </UL>
 
 <P><STRONG><a name="[31f]"></a>HAL_RCC_GetPCLK1Freq</STRONG> (Thumb, 24 bytes, Stack size 4 bytes, stm32f4xx_hal_rcc.o(.text), UNUSED)
@@ -4521,12 +4521,12 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = TIM_Base_SetConfig
 </UL>
 <BR>[Called By]<UL><LI><a href="#[159]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Init
-<LI><a href="#[35d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_Init
-<LI><a href="#[350]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_Init
 <LI><a href="#[3a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIMEx_HallSensor_Init
 <LI><a href="#[37b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Encoder_Init
 <LI><a href="#[373]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OnePulse_Init
 <LI><a href="#[367]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_IC_Init
+<LI><a href="#[35d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_Init
+<LI><a href="#[350]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_Init
 </UL>
 
 <P><STRONG><a name="[348]"></a>HAL_TIM_Base_MspInit</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f4xx_hal_tim.o(.text))
@@ -4536,8 +4536,8 @@ Global Symbols
 <P><STRONG><a name="[159]"></a>HAL_TIM_Base_Init</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, stm32f4xx_hal_tim.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = HAL_TIM_Base_Init &rArr; TIM_Base_SetConfig
 </UL>
-<BR>[Calls]<UL><LI><a href="#[349]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Base_SetConfig
-<LI><a href="#[348]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_MspInit
+<BR>[Calls]<UL><LI><a href="#[348]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_MspInit
+<LI><a href="#[349]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Base_SetConfig
 </UL>
 <BR>[Called By]<UL><LI><a href="#[158]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay
 </UL>
@@ -4600,8 +4600,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[350]"></a>HAL_TIM_OC_Init</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, stm32f4xx_hal_tim.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[349]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Base_SetConfig
-<LI><a href="#[351]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_MspInit
+<BR><BR>[Calls]<UL><LI><a href="#[351]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_MspInit
+<LI><a href="#[349]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Base_SetConfig
 </UL>
 
 <P><STRONG><a name="[353]"></a>HAL_TIM_OC_MspDeInit</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f4xx_hal_tim.o(.text), UNUSED)
@@ -4613,19 +4613,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[355]"></a>TIM_CCxChannelCmd</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, stm32f4xx_hal_tim.o(.text), UNUSED)
-<BR><BR>[Called By]<UL><LI><a href="#[366]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_Stop_DMA
-<LI><a href="#[365]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_Start_DMA
-<LI><a href="#[364]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_Stop_IT
-<LI><a href="#[363]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_Start_IT
-<LI><a href="#[362]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_Stop
-<LI><a href="#[361]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_Start
-<LI><a href="#[35c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_Stop_DMA
-<LI><a href="#[35b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_Start_DMA
-<LI><a href="#[358]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_Stop_IT
-<LI><a href="#[357]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_Start_IT
-<LI><a href="#[356]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_Stop
-<LI><a href="#[354]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_Start
-<LI><a href="#[3ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIMEx_HallSensor_Stop_DMA
+<BR><BR>[Called By]<UL><LI><a href="#[3ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIMEx_HallSensor_Stop_DMA
 <LI><a href="#[3ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIMEx_HallSensor_Start_DMA
 <LI><a href="#[3ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIMEx_HallSensor_Stop_IT
 <LI><a href="#[3aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIMEx_HallSensor_Start_IT
@@ -4647,6 +4635,18 @@ Global Symbols
 <LI><a href="#[36d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_IC_Start_IT
 <LI><a href="#[36c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_IC_Stop
 <LI><a href="#[36b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_IC_Start
+<LI><a href="#[366]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_Stop_DMA
+<LI><a href="#[365]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_Start_DMA
+<LI><a href="#[364]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_Stop_IT
+<LI><a href="#[363]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_Start_IT
+<LI><a href="#[362]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_Stop
+<LI><a href="#[361]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_Start
+<LI><a href="#[35c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_Stop_DMA
+<LI><a href="#[35b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_Start_DMA
+<LI><a href="#[358]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_Stop_IT
+<LI><a href="#[357]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_Start_IT
+<LI><a href="#[356]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_Stop
+<LI><a href="#[354]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_Start
 </UL>
 
 <P><STRONG><a name="[354]"></a>HAL_TIM_OC_Start</STRONG> (Thumb, 58 bytes, Stack size 8 bytes, stm32f4xx_hal_tim.o(.text), UNUSED)
@@ -4678,8 +4678,8 @@ Global Symbols
 <LI> stm32f4xx_hal_tim_ex.o(.text)
 </UL>
 <P><STRONG><a name="[35a]"></a>HAL_TIM_PWM_PulseFinishedCallback</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f4xx_hal_tim.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_DMADelayPulseCplt
-<LI><a href="#[385]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_IRQHandler
+<BR><BR>[Called By]<UL><LI><a href="#[385]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_IRQHandler
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_DMADelayPulseCplt
 </UL>
 
 <P><STRONG><a name="[bf]"></a>TIM_DMADelayPulseCplt</STRONG> (Thumb, 66 bytes, Stack size 8 bytes, stm32f4xx_hal_tim.o(.text))
@@ -4691,13 +4691,13 @@ Global Symbols
 <LI> stm32f4xx_hal_tim_ex.o(.text)
 </UL>
 <P><STRONG><a name="[35b]"></a>HAL_TIM_OC_Start_DMA</STRONG> (Thumb, 288 bytes, Stack size 24 bytes, stm32f4xx_hal_tim.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[355]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxChannelCmd
-<LI><a href="#[308]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Start_IT
+<BR><BR>[Calls]<UL><LI><a href="#[308]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Start_IT
+<LI><a href="#[355]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxChannelCmd
 </UL>
 
 <P><STRONG><a name="[35c]"></a>HAL_TIM_OC_Stop_DMA</STRONG> (Thumb, 170 bytes, Stack size 16 bytes, stm32f4xx_hal_tim.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[355]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxChannelCmd
-<LI><a href="#[2d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Abort_IT
+<BR><BR>[Calls]<UL><LI><a href="#[2d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Abort_IT
+<LI><a href="#[355]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxChannelCmd
 </UL>
 
 <P><STRONG><a name="[35e]"></a>HAL_TIM_PWM_MspInit</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f4xx_hal_tim.o(.text), UNUSED)
@@ -4705,8 +4705,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[35d]"></a>HAL_TIM_PWM_Init</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, stm32f4xx_hal_tim.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[349]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Base_SetConfig
-<LI><a href="#[35e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_MspInit
+<BR><BR>[Calls]<UL><LI><a href="#[35e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PWM_MspInit
+<LI><a href="#[349]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Base_SetConfig
 </UL>
 
 <P><STRONG><a name="[360]"></a>HAL_TIM_PWM_MspDeInit</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f4xx_hal_tim.o(.text), UNUSED)
@@ -4734,13 +4734,13 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[365]"></a>HAL_TIM_PWM_Start_DMA</STRONG> (Thumb, 288 bytes, Stack size 24 bytes, stm32f4xx_hal_tim.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[355]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxChannelCmd
-<LI><a href="#[308]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Start_IT
+<BR><BR>[Calls]<UL><LI><a href="#[308]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Start_IT
+<LI><a href="#[355]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxChannelCmd
 </UL>
 
 <P><STRONG><a name="[366]"></a>HAL_TIM_PWM_Stop_DMA</STRONG> (Thumb, 170 bytes, Stack size 16 bytes, stm32f4xx_hal_tim.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[355]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxChannelCmd
-<LI><a href="#[2d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Abort_IT
+<BR><BR>[Calls]<UL><LI><a href="#[2d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Abort_IT
+<LI><a href="#[355]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxChannelCmd
 </UL>
 
 <P><STRONG><a name="[368]"></a>HAL_TIM_IC_MspInit</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f4xx_hal_tim.o(.text), UNUSED)
@@ -4748,8 +4748,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[367]"></a>HAL_TIM_IC_Init</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, stm32f4xx_hal_tim.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[349]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Base_SetConfig
-<LI><a href="#[368]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_IC_MspInit
+<BR><BR>[Calls]<UL><LI><a href="#[368]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_IC_MspInit
+<LI><a href="#[349]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Base_SetConfig
 </UL>
 
 <P><STRONG><a name="[36a]"></a>HAL_TIM_IC_MspDeInit</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f4xx_hal_tim.o(.text), UNUSED)
@@ -4802,13 +4802,13 @@ Global Symbols
 <LI> stm32f4xx_hal_tim_ex.o(.text)
 </UL>
 <P><STRONG><a name="[371]"></a>HAL_TIM_IC_Start_DMA</STRONG> (Thumb, 264 bytes, Stack size 24 bytes, stm32f4xx_hal_tim.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[355]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxChannelCmd
-<LI><a href="#[308]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Start_IT
+<BR><BR>[Calls]<UL><LI><a href="#[308]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Start_IT
+<LI><a href="#[355]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxChannelCmd
 </UL>
 
 <P><STRONG><a name="[372]"></a>HAL_TIM_IC_Stop_DMA</STRONG> (Thumb, 136 bytes, Stack size 16 bytes, stm32f4xx_hal_tim.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[355]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxChannelCmd
-<LI><a href="#[2d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Abort_IT
+<BR><BR>[Calls]<UL><LI><a href="#[2d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Abort_IT
+<LI><a href="#[355]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxChannelCmd
 </UL>
 
 <P><STRONG><a name="[374]"></a>HAL_TIM_OnePulse_MspInit</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f4xx_hal_tim.o(.text), UNUSED)
@@ -4816,8 +4816,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[373]"></a>HAL_TIM_OnePulse_Init</STRONG> (Thumb, 76 bytes, Stack size 16 bytes, stm32f4xx_hal_tim.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[349]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Base_SetConfig
-<LI><a href="#[374]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OnePulse_MspInit
+<BR><BR>[Calls]<UL><LI><a href="#[374]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OnePulse_MspInit
+<LI><a href="#[349]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Base_SetConfig
 </UL>
 
 <P><STRONG><a name="[376]"></a>HAL_TIM_OnePulse_MspDeInit</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f4xx_hal_tim.o(.text), UNUSED)
@@ -4849,8 +4849,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[37b]"></a>HAL_TIM_Encoder_Init</STRONG> (Thumb, 162 bytes, Stack size 24 bytes, stm32f4xx_hal_tim.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[349]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Base_SetConfig
-<LI><a href="#[37c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Encoder_MspInit
+<BR><BR>[Calls]<UL><LI><a href="#[37c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Encoder_MspInit
+<LI><a href="#[349]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Base_SetConfig
 </UL>
 
 <P><STRONG><a name="[37e]"></a>HAL_TIM_Encoder_MspDeInit</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f4xx_hal_tim.o(.text), UNUSED)
@@ -4878,13 +4878,13 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[383]"></a>HAL_TIM_Encoder_Start_DMA</STRONG> (Thumb, 340 bytes, Stack size 32 bytes, stm32f4xx_hal_tim.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[355]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxChannelCmd
-<LI><a href="#[308]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Start_IT
+<BR><BR>[Calls]<UL><LI><a href="#[308]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Start_IT
+<LI><a href="#[355]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxChannelCmd
 </UL>
 
 <P><STRONG><a name="[384]"></a>HAL_TIM_Encoder_Stop_DMA</STRONG> (Thumb, 154 bytes, Stack size 8 bytes, stm32f4xx_hal_tim.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[355]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxChannelCmd
-<LI><a href="#[2d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Abort_IT
+<BR><BR>[Calls]<UL><LI><a href="#[2d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Abort_IT
+<LI><a href="#[355]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxChannelCmd
 </UL>
 
 <P><STRONG><a name="[388]"></a>HAL_TIM_TriggerCallback</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f4xx_hal_tim.o(.text))
@@ -5015,10 +5015,10 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[3a4]"></a>HAL_TIMEx_HallSensor_Init</STRONG> (Thumb, 190 bytes, Stack size 48 bytes, stm32f4xx_hal_tim_ex.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[349]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Base_SetConfig
-<LI><a href="#[3a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIMEx_HallSensor_MspInit
+<BR><BR>[Calls]<UL><LI><a href="#[3a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIMEx_HallSensor_MspInit
 <LI><a href="#[391]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_TI1_SetConfig
 <LI><a href="#[38c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC2_SetConfig
+<LI><a href="#[349]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Base_SetConfig
 </UL>
 
 <P><STRONG><a name="[3a7]"></a>HAL_TIMEx_HallSensor_MspDeInit</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f4xx_hal_tim_ex.o(.text), UNUSED)
@@ -5046,13 +5046,13 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[3ac]"></a>HAL_TIMEx_HallSensor_Start_DMA</STRONG> (Thumb, 126 bytes, Stack size 16 bytes, stm32f4xx_hal_tim_ex.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[355]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxChannelCmd
-<LI><a href="#[308]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Start_IT
+<BR><BR>[Calls]<UL><LI><a href="#[308]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Start_IT
+<LI><a href="#[355]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxChannelCmd
 </UL>
 
 <P><STRONG><a name="[3ad]"></a>HAL_TIMEx_HallSensor_Stop_DMA</STRONG> (Thumb, 62 bytes, Stack size 8 bytes, stm32f4xx_hal_tim_ex.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[355]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxChannelCmd
-<LI><a href="#[2d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Abort_IT
+<BR><BR>[Calls]<UL><LI><a href="#[2d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Abort_IT
+<LI><a href="#[355]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxChannelCmd
 </UL>
 
 <P><STRONG><a name="[3ae]"></a>HAL_TIMEx_OCN_Start</STRONG> (Thumb, 46 bytes, Stack size 8 bytes, stm32f4xx_hal_tim_ex.o(.text), UNUSED)
@@ -5564,7 +5564,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[3cc]"></a>netos_unlock</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, net_config.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = netos_unlock &rArr; osMutexRelease &rArr; EvrRtxMutexError &rArr; EventRecord2 &rArr; EventRecordItem
+<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = netos_unlock &rArr; osMutexRelease &rArr; EvrRtxMutexRelease &rArr; EventRecord2 &rArr; EventRecordItem
 </UL>
 <BR>[Calls]<UL><LI><a href="#[283]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexRelease
 </UL>
@@ -6104,7 +6104,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[144]"></a>netIF_GetOption</STRONG> (Thumb, 128 bytes, Stack size 24 bytes, net_sys.o(i.netIF_GetOption))
-<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = netIF_GetOption &rArr; net_sys_unlock &rArr; netos_unlock &rArr; osMutexRelease &rArr; EvrRtxMutexError &rArr; EventRecord2 &rArr; EventRecordItem
+<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = netIF_GetOption &rArr; net_sys_unlock &rArr; netos_unlock &rArr; osMutexRelease &rArr; EvrRtxMutexRelease &rArr; EventRecord2 &rArr; EventRecordItem
 </UL>
 <BR>[Calls]<UL><LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EventRecord2
 <LI><a href="#[469]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;net_if_map_all
@@ -6115,7 +6115,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[13a]"></a>netIF_SetOption</STRONG> (Thumb, 124 bytes, Stack size 24 bytes, net_sys.o(i.netIF_SetOption))
-<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = netIF_SetOption &rArr; net_sys_unlock &rArr; netos_unlock &rArr; osMutexRelease &rArr; EvrRtxMutexError &rArr; EventRecord2 &rArr; EventRecordItem
+<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = netIF_SetOption &rArr; net_sys_unlock &rArr; netos_unlock &rArr; osMutexRelease &rArr; EvrRtxMutexRelease &rArr; EventRecord2 &rArr; EventRecordItem
 </UL>
 <BR>[Calls]<UL><LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EventRecord2
 <LI><a href="#[469]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;net_if_map_all
@@ -6176,7 +6176,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[148]"></a>netTCP_GetPeer</STRONG> (Thumb, 32 bytes, Stack size 16 bytes, net_tcp.o(i.netTCP_GetPeer))
-<BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = netTCP_GetPeer &rArr; net_sys_unlock &rArr; netos_unlock &rArr; osMutexRelease &rArr; EvrRtxMutexError &rArr; EventRecord2 &rArr; EventRecordItem
+<BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = netTCP_GetPeer &rArr; net_sys_unlock &rArr; netos_unlock &rArr; osMutexRelease &rArr; EvrRtxMutexRelease &rArr; EventRecord2 &rArr; EventRecordItem
 </UL>
 <BR>[Calls]<UL><LI><a href="#[46d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;net_tcp_get_peer
 <LI><a href="#[466]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;net_sys_unlock
@@ -7004,7 +7004,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[49f]"></a>net_mem_shrink</STRONG> (Thumb, 62 bytes, Stack size 16 bytes, net_mem.o(i.net_mem_shrink))
-<BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = net_mem_shrink &rArr; mem_unlock &rArr; netos_unlock &rArr; osMutexRelease &rArr; EvrRtxMutexError &rArr; EventRecord2 &rArr; EventRecordItem
+<BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = net_mem_shrink &rArr; mem_unlock &rArr; netos_unlock &rArr; osMutexRelease &rArr; EvrRtxMutexRelease &rArr; EventRecord2 &rArr; EventRecordItem
 </UL>
 <BR>[Calls]<UL><LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EventRecord2
 <LI><a href="#[450]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mem_unlock
@@ -7213,7 +7213,7 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> net_config.o(.text)
 </UL>
 <P><STRONG><a name="[466]"></a>net_sys_unlock</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, net_sys.o(i.net_sys_unlock))
-<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = net_sys_unlock &rArr; netos_unlock &rArr; osMutexRelease &rArr; EvrRtxMutexError &rArr; EventRecord2 &rArr; EventRecordItem
+<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = net_sys_unlock &rArr; netos_unlock &rArr; osMutexRelease &rArr; EvrRtxMutexRelease &rArr; EventRecord2 &rArr; EventRecordItem
 </UL>
 <BR>[Calls]<UL><LI><a href="#[3cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;netos_unlock
 </UL>
@@ -8072,10 +8072,10 @@ Local Symbols
 <P><STRONG><a name="[8b]"></a>svcRtxMutexNew</STRONG> (Thumb, 144 bytes, Stack size 16 bytes, rtx_mutex.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = svcRtxMutexNew &rArr; osRtxMemoryAlloc &rArr; EvrRtxMemoryAlloc &rArr; EventRecord4 &rArr; EventRecordItem
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexCreated
-<LI><a href="#[1eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexError
-<LI><a href="#[253]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxMemoryPoolAlloc
+<BR>[Calls]<UL><LI><a href="#[253]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxMemoryPoolAlloc
 <LI><a href="#[251]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxMemoryAlloc
+<LI><a href="#[1ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexCreated
+<LI><a href="#[1eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexError
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> rtx_mutex.o(.text)
 </UL>
@@ -8089,26 +8089,26 @@ Local Symbols
 <P><STRONG><a name="[8d]"></a>svcRtxMutexAcquire</STRONG> (Thumb, 222 bytes, Stack size 24 bytes, rtx_mutex.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = svcRtxMutexAcquire &rArr; osRtxThreadWaitEnter &rArr; EvrRtxThreadBlocked &rArr; EventRecord2 &rArr; EventRecordItem
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexError
-<LI><a href="#[25a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxThreadListPut
+<BR>[Calls]<UL><LI><a href="#[25a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxThreadListPut
 <LI><a href="#[17c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxThreadWaitEnter
 <LI><a href="#[27d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxThreadListSort
 <LI><a href="#[1f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexNotAcquired
 <LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexAcquired
 <LI><a href="#[1f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexAcquireTimeout
 <LI><a href="#[1f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexAcquirePending
+<LI><a href="#[1eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexError
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> rtx_mutex.o(.text)
 </UL>
 <P><STRONG><a name="[8e]"></a>svcRtxMutexRelease</STRONG> (Thumb, 232 bytes, Stack size 16 bytes, rtx_mutex.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = svcRtxMutexRelease &rArr; osRtxThreadWaitExit &rArr; osRtxThreadDispatch &rArr; osRtxThreadBlock &rArr; EvrRtxThreadPreempted &rArr; EventRecord2 &rArr; EventRecordItem
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexError
-<LI><a href="#[258]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxThreadWaitExit
+<BR>[Calls]<UL><LI><a href="#[258]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxThreadWaitExit
 <LI><a href="#[23a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxThreadListGet
 <LI><a href="#[23e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxThreadDispatch
 <LI><a href="#[1f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexReleased
 <LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexAcquired
+<LI><a href="#[1eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexError
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> rtx_mutex.o(.text)
 </UL>
@@ -8122,14 +8122,14 @@ Local Symbols
 <P><STRONG><a name="[90]"></a>svcRtxMutexDelete</STRONG> (Thumb, 186 bytes, Stack size 16 bytes, rtx_mutex.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = svcRtxMutexDelete &rArr; osRtxMemoryPoolFree &rArr; EvrRtxMemoryBlockFree &rArr; EventRecord4 &rArr; EventRecordItem
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexError
-<LI><a href="#[258]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxThreadWaitExit
+<BR>[Calls]<UL><LI><a href="#[258]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxThreadWaitExit
 <LI><a href="#[23a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxThreadListGet
 <LI><a href="#[23e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxThreadDispatch
 <LI><a href="#[256]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxMemoryPoolFree
 <LI><a href="#[252]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxMemoryFree
 <LI><a href="#[27d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxThreadListSort
 <LI><a href="#[1f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexDestroyed
+<LI><a href="#[1eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxMutexError
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> rtx_mutex.o(.text)
 </UL>
@@ -8339,9 +8339,9 @@ Local Symbols
 <P><STRONG><a name="[99]"></a>osRtxThreadPostProcess</STRONG> (Thumb, 58 bytes, Stack size 16 bytes, rtx_thread.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = osRtxThreadPostProcess &rArr; osRtxThreadWaitExit &rArr; osRtxThreadDispatch &rArr; osRtxThreadBlock &rArr; EvrRtxThreadPreempted &rArr; EventRecord2 &rArr; EventRecordItem
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsWaitCompleted
-<LI><a href="#[258]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxThreadWaitExit
+<BR>[Calls]<UL><LI><a href="#[258]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxThreadWaitExit
 <LI><a href="#[29e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ThreadFlagsCheck
+<LI><a href="#[1cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsWaitCompleted
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> rtx_thread.o(.text)
 </UL>
@@ -8544,21 +8544,21 @@ Local Symbols
 <P><STRONG><a name="[ab]"></a>svcRtxThreadFlagsSet</STRONG> (Thumb, 142 bytes, Stack size 16 bytes, rtx_thread.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = svcRtxThreadFlagsSet &rArr; osRtxThreadWaitExit &rArr; osRtxThreadDispatch &rArr; osRtxThreadBlock &rArr; EvrRtxThreadPreempted &rArr; EventRecord2 &rArr; EventRecordItem
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsWaitCompleted
-<LI><a href="#[1c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsSetDone
-<LI><a href="#[1c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsError
-<LI><a href="#[258]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxThreadWaitExit
+<BR>[Calls]<UL><LI><a href="#[258]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxThreadWaitExit
 <LI><a href="#[29e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ThreadFlagsCheck
 <LI><a href="#[29a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ThreadFlagsSet
+<LI><a href="#[1cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsWaitCompleted
+<LI><a href="#[1c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsSetDone
+<LI><a href="#[1c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsError
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> rtx_thread.o(.text)
 </UL>
 <P><STRONG><a name="[ac]"></a>svcRtxThreadFlagsClear</STRONG> (Thumb, 64 bytes, Stack size 8 bytes, rtx_thread.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = svcRtxThreadFlagsClear &rArr; EvrRtxThreadFlagsClearDone &rArr; EventRecord2 &rArr; EventRecordItem
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsClearDone
+<BR>[Calls]<UL><LI><a href="#[29c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ThreadFlagsClear
+<LI><a href="#[1c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsClearDone
 <LI><a href="#[1c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsError
-<LI><a href="#[29c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ThreadFlagsClear
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> rtx_thread.o(.text)
 </UL>
@@ -8572,13 +8572,13 @@ Local Symbols
 <P><STRONG><a name="[ae]"></a>svcRtxThreadFlagsWait</STRONG> (Thumb, 146 bytes, Stack size 24 bytes, rtx_thread.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = svcRtxThreadFlagsWait &rArr; EvrRtxThreadFlagsWaitPending &rArr; EventRecord4 &rArr; EventRecordItem
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsWaitNotCompleted
+<BR>[Calls]<UL><LI><a href="#[17c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxThreadWaitEnter
+<LI><a href="#[29e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ThreadFlagsCheck
+<LI><a href="#[1cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsWaitNotCompleted
 <LI><a href="#[1cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsWaitCompleted
 <LI><a href="#[1cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsWaitTimeout
 <LI><a href="#[1ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsWaitPending
 <LI><a href="#[1c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxThreadFlagsError
-<LI><a href="#[17c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxThreadWaitEnter
-<LI><a href="#[29e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ThreadFlagsCheck
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> rtx_thread.o(.text)
 </UL>
@@ -8658,10 +8658,10 @@ Local Symbols
 <P><STRONG><a name="[b0]"></a>svcRtxTimerNew</STRONG> (Thumb, 178 bytes, Stack size 24 bytes, rtx_timer.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = svcRtxTimerNew &rArr; osRtxMemoryAlloc &rArr; EvrRtxMemoryAlloc &rArr; EventRecord4 &rArr; EventRecordItem
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerCreated
-<LI><a href="#[1cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerError
-<LI><a href="#[253]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxMemoryPoolAlloc
+<BR>[Calls]<UL><LI><a href="#[253]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxMemoryPoolAlloc
 <LI><a href="#[251]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxMemoryAlloc
+<LI><a href="#[1d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerCreated
+<LI><a href="#[1cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerError
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> rtx_timer.o(.text)
 </UL>
@@ -8675,19 +8675,19 @@ Local Symbols
 <P><STRONG><a name="[b2]"></a>svcRtxTimerStart</STRONG> (Thumb, 94 bytes, Stack size 16 bytes, rtx_timer.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = svcRtxTimerStart &rArr; EvrRtxTimerStarted &rArr; EventRecord2 &rArr; EventRecordItem
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerStarted
-<LI><a href="#[1cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerError
-<LI><a href="#[2bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerRemove
+<BR>[Calls]<UL><LI><a href="#[2bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerRemove
 <LI><a href="#[2be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerInsert
+<LI><a href="#[1d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerStarted
+<LI><a href="#[1cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerError
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> rtx_timer.o(.text)
 </UL>
 <P><STRONG><a name="[b3]"></a>svcRtxTimerStop</STRONG> (Thumb, 72 bytes, Stack size 16 bytes, rtx_timer.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = svcRtxTimerStop &rArr; EvrRtxTimerStopped &rArr; EventRecord2 &rArr; EventRecordItem
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerStopped
+<BR>[Calls]<UL><LI><a href="#[2bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerRemove
+<LI><a href="#[1d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerStopped
 <LI><a href="#[1cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerError
-<LI><a href="#[2bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerRemove
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> rtx_timer.o(.text)
 </UL>
@@ -8701,11 +8701,11 @@ Local Symbols
 <P><STRONG><a name="[b5]"></a>svcRtxTimerDelete</STRONG> (Thumb, 90 bytes, Stack size 16 bytes, rtx_timer.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = svcRtxTimerDelete &rArr; osRtxMemoryPoolFree &rArr; EvrRtxMemoryBlockFree &rArr; EventRecord4 &rArr; EventRecordItem
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerDestroyed
-<LI><a href="#[1cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerError
-<LI><a href="#[256]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxMemoryPoolFree
+<BR>[Calls]<UL><LI><a href="#[256]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxMemoryPoolFree
 <LI><a href="#[252]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osRtxMemoryFree
 <LI><a href="#[2bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerRemove
+<LI><a href="#[1da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerDestroyed
+<LI><a href="#[1cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EvrRtxTimerError
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> rtx_timer.o(.text)
 </UL>
@@ -10123,7 +10123,7 @@ Local Symbols
 </UL>
 
 <P><STRONG><a name="[450]"></a>mem_unlock</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, net_mem.o(i.mem_unlock))
-<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = mem_unlock &rArr; netos_unlock &rArr; osMutexRelease &rArr; EvrRtxMutexError &rArr; EventRecord2 &rArr; EventRecordItem
+<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = mem_unlock &rArr; netos_unlock &rArr; osMutexRelease &rArr; EvrRtxMutexRelease &rArr; EventRecord2 &rArr; EventRecordItem
 </UL>
 <BR>[Calls]<UL><LI><a href="#[3cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;netos_unlock
 </UL>
@@ -10164,11 +10164,11 @@ Local Symbols
 </UL>
 
 <P><STRONG><a name="[3e9]"></a>_printf_core</STRONG> (Thumb, 1704 bytes, Stack size 136 bytes, printfa.o(i._printf_core), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[3ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
-<LI><a href="#[3ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_pre_padding
+<BR><BR>[Calls]<UL><LI><a href="#[3ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_pre_padding
 <LI><a href="#[3ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_post_padding
 <LI><a href="#[3ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_digits
 <LI><a href="#[31d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
+<LI><a href="#[3ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
 </UL>
 <BR>[Called By]<UL><LI><a href="#[3e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__0sprintf
 </UL>

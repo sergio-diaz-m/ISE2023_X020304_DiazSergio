@@ -80,8 +80,8 @@ static __NO_RETURN void Th_RTC (void *arg) {
   LCD_init();
 	
 	RTC_init();
-	setTime(7,7,40,1,0,0);
-	setDate(6,10,2010,2);
+	setTime(7,7,30,1,0,0);
+	setDate(6,10,2023,2);
 	
   while(1) {
 
