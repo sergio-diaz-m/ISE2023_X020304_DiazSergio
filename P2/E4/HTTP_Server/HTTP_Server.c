@@ -85,6 +85,22 @@ static void config_pin_usrbtn()
 }
 //**********************
 
+//******* Blink LEDs SNTP **************
+//Blink LEDs when SNTP server 
+//updates local time
+//**************************************
+
+void SNTP_ledsBlink(void){
+	uint8_t i;
+	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_7,GPIO_PIN_RESET);
+	for(i=0; i<8; i++){
+		HAL_GPIO_TogglePin(GPIOB,GPIO_PIN_14);
+		osDelay(250);
+	}
+}
+//**************************************
+
 //*******ADC*************
 ADC_HandleTypeDef adchandle; //handler definition
 /* Read analog inputs */
@@ -177,6 +193,9 @@ static __NO_RETURN void BlinkLed (void *arg) {
       }
     }
     osDelay (100);
+		if(osThreadFlagsWait(0x04,osFlagsWaitAny,0)==0x04){
+			SNTP_ledsBlink();
+		}
   }
 }
 
@@ -214,6 +233,7 @@ static void time_callback (uint32_t seconds, uint32_t seconds_fraction) {
 static __NO_RETURN void Th_SNTP (void *arg) {
 	while(1){
 		get_time();
+		osThreadFlagsSet (TID_Led, 0x04);
 		osDelay(180000);
 	}
 }
