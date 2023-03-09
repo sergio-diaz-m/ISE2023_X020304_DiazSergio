@@ -5,7 +5,6 @@ t <script language=JavaScript type="text/javascript">
 t var formUpdate = new periodicObj("ad.cgx", 500);
 t var formUpdate = new periodicObj("ad.cgx", 500);
 t function plotADGraph() {
-t  adVal = document.getElementById("showtime").value;
 t  numVal = parseInt(adVal, 16);
 t  voltsVal = (numVal*3.3/4096);
 t  tableSize = (numVal*100/4096);
@@ -30,16 +29,12 @@ t <table border=0 width=99%><font size="3">
 t <tr style="background-color: #aaccff">
 t  <th width=50%>Time</th>
 t  <th width=50%>Date</th>
-t <tr><td><img src="pabb.gif">POT1:</td>
+c h	1 <tr><td>%s
 t   <td align="center">
-t <input type="text" readonly style="background-color: transparent; border: 0px"
-c h 1  size="25" id="showtime" value="%s"></td>
-t <td align="center"><input type="text" readonly style="background-color: transparent; border: 0px"
-c h 2  size="25" id="showdate" value="%s"></td>
+c h	2 %s</td></tr>
 t </font></table>
-t <p align=center>
-t <input type=button value="Refresh" onclick="updateMultiple(formUpdate,plotADGraph)">
-t Periodic:<input type="checkbox" id="adChkBox" onclick="periodicUpdateAd()">
+#Refresh page each second
+t <META HTTP-EQUIV="REFRESH" CONTENT="1">
 t </p></form>
 i pg_footer.inc
 . End of script must be closed with period
