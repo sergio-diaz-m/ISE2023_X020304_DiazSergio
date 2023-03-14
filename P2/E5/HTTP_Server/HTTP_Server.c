@@ -14,6 +14,7 @@
 #include "rl_net.h"                     // Keil.MDK-Pro::Network:CORE
 
 #include "stm32f4xx_hal.h"              // Keil::Device:STM32Cube HAL:Common
+#include "Net_Config_SNTP_Client.h"
 //#include "Board_Buttons.h"              // ::Board Support:Buttons
 //#include "Board_ADC.h"                  // ::Board Support:A/D Converter
 //#include "Board_GLCD.h"                 // ::Board Support:Graphic LCD
@@ -43,6 +44,8 @@ extern osThreadId_t TID_Display;
 //extern osThreadId_t TID_Led;
 
 bool LEDrun;
+int sntp_sel;
+
 char lcd_text[2][20+1] = { "LCD line 1",
                            "LCD line 2" };
 
@@ -203,18 +206,34 @@ static __NO_RETURN void BlinkLed (void *arg) {
 //  Thread 'SNTP': Gets the current time from a SNTP server every 60 minutes
 // *---------------------------------------------------------------------------*/
 
-const NET_ADDR4 ntp_server = { NET_ADDR_IP4, 0, 217, 79, 179, 106 };
+
 struct tm time_now;
 
 static void time_callback (uint32_t seconds, uint32_t seconds_fraction);
- 
+
+
 void get_time (void) {
-  if (netSNTPc_GetTime (NULL, time_callback) == netOK) {
-    //printf ("SNTP request sent.\n");
-  }
-  else {
+	const NET_ADDR4 ntp_server1 = { NET_ADDR_IP4, 0, 130, 206, 3, 166 }; // hora.rediris.es
+	const NET_ADDR4 ntp_server2 = { NET_ADDR_IP4, 0, 150, 214, 94, 5 }; // hora.roa.es
+	
+	//Server select 2
+	if(sntp_sel){
+		if (netSNTPc_GetTime ((NET_ADDR*)&ntp_server2, time_callback) == netOK) {
+			//printf ("SNTP request sent.\n");
+		}
+		else {
     //printf ("SNTP not ready or bad parameters.\n");
+		}
   }
+	//Server select 1
+	else{
+		if (netSNTPc_GetTime ((NET_ADDR*)&ntp_server1, time_callback) == netOK) {
+			//printf ("SNTP request sent.\n");
+		}
+		else {
+    //printf ("SNTP not ready or bad parameters.\n");
+		}
+	}
 }
  
 static void time_callback (uint32_t seconds, uint32_t seconds_fraction) {
@@ -234,7 +253,9 @@ static __NO_RETURN void Th_SNTP (void *arg) {
 	while(1){
 		get_time();
 		osThreadFlagsSet (TID_Led, 0x04);
-		osDelay(180000);
+		if(osThreadFlagsWait(0x08,osFlagsWaitAny,180000)==0x08){
+			//Do nothing
+		}
 	}
 }
 ///*----------------------------------------------------------------------------
@@ -290,7 +311,7 @@ __NO_RETURN void app_main (void *arg) {
 	sprintf (buf, "IP4:%-16s",ip_ascii);
 	writeLCD(buf,2);
 	
-	osDelay(2000);
+	osDelay(5000);
 	flush_buffer();
 	//*********End of initial screen********************
 	

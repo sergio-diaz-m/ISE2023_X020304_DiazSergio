@@ -27,7 +27,12 @@ extern char lcd_text[2][20+1];
 extern char showtime [25];
 extern char showdate [25] ;
 
+extern int sntp_sel;
+
+char alarm_hms [3][2] ;
+
 extern osThreadId_t TID_Display;
+extern osThreadId_t TID_Th_SNTP;
 
 // Local variables.
 static uint8_t P2;
@@ -137,6 +142,12 @@ void netCGI_ProcessData (uint8_t code, const char *data, uint32_t len) {
       else if (strcmp (var, "ctrl=Browser") == 0) {
                 LEDrun = false;
       }
+			else if (strcmp (var, "sntp=Server 1") == 0) {
+                sntp_sel = false;
+      }
+			else if (strcmp (var, "sntp=Server 2") == 0) {
+                sntp_sel = true;
+      }
       else if ((strncmp (var, "pw0=", 4) == 0) ||
                (strncmp (var, "pw2=", 4) == 0)) {
         // Change password, retyped password
@@ -159,6 +170,21 @@ void netCGI_ProcessData (uint8_t code, const char *data, uint32_t len) {
         // LCD Module line 2 text
                 strcpy (lcd_text[1], var+5);
                 osThreadFlagsSet (TID_Display, 0x01);
+      }
+      else if (strncmp (var, "hours=", 2) == 0) {
+        // LCD Module line 2 text
+                strcpy (alarm_hms[0], var+2);
+                
+      }
+      else if (strncmp (var, "minutes=", 2) == 0) {
+        // LCD Module line 2 text
+                strcpy (alarm_hms[1], var+2);
+                
+      }
+      else if (strncmp (var, "seconds=", 2) == 0) {
+        // LCD Module line 2 text
+                strcpy (alarm_hms[2], var+2);
+                
       }
     }
   } while (data);
@@ -362,7 +388,29 @@ uint32_t netCGI_Script (const char *env, char *buf, uint32_t buflen, uint32_t *p
           break;
       }
       break;
-
+			
+			case 'i':
+				if (env[2] == 'c') {
+				len = (uint32_t)sprintf (buf, &env[4], sntp_sel ?     ""     : "selected",
+        sntp_sel ? "selected" :    ""     );
+				osThreadFlagsSet (TID_Th_SNTP, 0x08);
+				}
+			break;
+				
+			case 'j':
+      // Alarm
+      switch (env[2]) {
+        case '1':
+                  len = (uint32_t)sprintf (buf, &env[4], alarm_hms[0]);
+          break;
+        case '2':
+                  len = (uint32_t)sprintf (buf, &env[4], alarm_hms[1]);
+          break;
+				case '3':
+                  len = (uint32_t)sprintf (buf, &env[4], alarm_hms[2]);
+          break;
+      }
+      break;
     case 'x':
       // AD Input from 'ad.cgx'
       adv = AD_in (0);

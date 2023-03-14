@@ -47,3 +47,4 @@
 .\debug\http_server.o: C:\Users\prestamo\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.13.0\Network\Include\rl_net.h
 .\debug\http_server.o: C:\Users\prestamo\AppData\Local\Arm\Packs\Keil\MDK-Middleware\7.13.0\Network\Include\rl_net_ds.h
 .\debug\http_server.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\debug\http_server.o: .\RTE\Network\Net_Config_SNTP_Client.h

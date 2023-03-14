@@ -66,7 +66,7 @@
 //     <i>This option enables fragmentation of outgoing IP datagrams,
 //     <i>and reassembling the fragments of incoming IP datagrams.
 //     <i>Default: enabled
-#define ETH0_IP4_FRAG_ENABLE    1
+#define ETH0_IP4_FRAG_ENABLE    0
 
 //       <o>MTU size <576-1500>
 //       <i>Maximum Transmission Unit in bytes
