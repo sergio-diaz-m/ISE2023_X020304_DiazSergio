@@ -29,9 +29,12 @@ extern char showdate [25] ;
 
 extern int sntp_sel;
 
-char alarm_hms [3][2] ;
+extern char alarm_h [2] ;
+extern char alarm_m [2] ;
+extern char alarm_s [2] ;
 
 extern osThreadId_t TID_Display;
+extern osThreadId_t TID_Th_RTC;
 extern osThreadId_t TID_Th_SNTP;
 
 // Local variables.
@@ -39,6 +42,7 @@ static uint8_t P2;
 static uint8_t ip_addr[NET_ADDR_IP6_LEN];
 static char    ip_string[40];
 
+uint8_t horas;
 
 // My structure of CGI status variable.
 typedef struct {
@@ -171,19 +175,19 @@ void netCGI_ProcessData (uint8_t code, const char *data, uint32_t len) {
                 strcpy (lcd_text[1], var+5);
                 osThreadFlagsSet (TID_Display, 0x01);
       }
-      else if (strncmp (var, "hours=", 2) == 0) {
-        // LCD Module line 2 text
-                strcpy (alarm_hms[0], var+2);
+      else if (strncmp (var, "hours=", strlen("hours=")) == 0) {
+        // hours text
+                strcpy (alarm_h, var+strlen("hours="));
                 
       }
-      else if (strncmp (var, "minutes=", 2) == 0) {
-        // LCD Module line 2 text
-                strcpy (alarm_hms[1], var+2);
+      else if (strncmp (var, "minutes=", strlen("minutes=")) == 0) {
+        // minutes text
+                strcpy (alarm_m, var+strlen("minutes="));
                 
       }
-      else if (strncmp (var, "seconds=", 2) == 0) {
-        // LCD Module line 2 text
-                strcpy (alarm_hms[2], var+2);
+      else if (strncmp (var, "seconds=", strlen("seconds=")) == 0) {
+        // seconds text
+                strcpy (alarm_s, var+strlen("seconds="));
                 
       }
     }
@@ -401,13 +405,14 @@ uint32_t netCGI_Script (const char *env, char *buf, uint32_t buflen, uint32_t *p
       // Alarm
       switch (env[2]) {
         case '1':
-                  len = (uint32_t)sprintf (buf, &env[4], alarm_hms[0]);
+                  len = (uint32_t)sprintf (buf, &env[4], alarm_h);
           break;
         case '2':
-                  len = (uint32_t)sprintf (buf, &env[4], alarm_hms[1]);
+                  len = (uint32_t)sprintf (buf, &env[4],alarm_m);
           break;
 				case '3':
-                  len = (uint32_t)sprintf (buf, &env[4], alarm_hms[2]);
+                  len = (uint32_t)sprintf (buf, &env[4], alarm_s);
+								  osThreadFlagsSet (TID_Th_RTC, 0x10);
           break;
       }
       break;

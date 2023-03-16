@@ -7,7 +7,9 @@
  *----------------------------------------------------------------------------*/
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
+#include <string.h>
 
 #include "main.h"
 
@@ -49,6 +51,11 @@ int sntp_sel;
 char lcd_text[2][20+1] = { "LCD line 1",
                            "LCD line 2" };
 
+char alarm_h [2]="00" ;
+char alarm_m [2]="00" ;
+char alarm_s [2]="00" ;
+													
+													 
 static uint8_t ip_addr[NET_ADDR_IP6_LEN];
 static char    ip_ascii[40];
 static char    buf[24];
@@ -258,14 +265,31 @@ static __NO_RETURN void Th_SNTP (void *arg) {
 		}
 	}
 }
+//RTC variable definitions
+extern RTC_HandleTypeDef hrtc;
+extern RTC_TypeDef rtc; 
+RTC_AlarmTypeDef sAlarm;
+
+void RTC_Alarm_IRQHandler(void) {
+  HAL_RTC_AlarmIRQHandler(&hrtc);
+}
+void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc){
+
+	
+}
+
 ///*----------------------------------------------------------------------------
 //  Thread 'RTC': Set and get RTC date and time periodically
 // *---------------------------------------------------------------------------*/
 static __NO_RETURN void Th_RTC (void *arg) {
 	//LCD init to display on screen
+
+
+	
 	LCD_reset();
   osDelay(50);
   LCD_init();
+	
 	
 	RTC_init();
 	
@@ -279,9 +303,24 @@ static __NO_RETURN void Th_RTC (void *arg) {
 	 printTime();
 	 printDate();
 	 //Set clock refresh rate in ms
-    osDelay (1000); 
+   if(osThreadFlagsWait(0x10,osFlagsWaitAny,250)==0x10){
+//		 test=((alarm_h[0]-0x30)*10 +(alarm_h[1]-0x30));
+		sAlarm.AlarmTime.Hours = ((alarm_h[0]-0x30)*10 +(alarm_h[1]-0x30)) ;
+		sAlarm.AlarmTime.Minutes = (alarm_m[0]-0x30)*10 +(alarm_m[1]-0x30);
+		sAlarm.AlarmTime.Seconds = (alarm_s[0]-0x30)*10 +(alarm_s[1]-0x30);
+		sAlarm.AlarmTime.TimeFormat = RTC_HOURFORMAT12_AM;
+		sAlarm.AlarmTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
+		sAlarm.AlarmTime.StoreOperation = RTC_STOREOPERATION_RESET;
+		sAlarm.AlarmMask = RTC_ALARMMASK_DATEWEEKDAY;
+		sAlarm.AlarmDateWeekDaySel = RTC_ALARMDATEWEEKDAYSEL_DATE;
+		sAlarm.AlarmDateWeekDay = 1;
+		sAlarm.Alarm = RTC_ALARM_A;
+		HAL_RTC_SetAlarm_IT(&hrtc, &sAlarm, RTC_FORMAT_BIN);
+		HAL_NVIC_EnableIRQ(RTC_Alarm_IRQn);
+	 }
   }
 }
+
 /*----------------------------------------------------------------------------
   Main Thread 'main': Run Network
  *---------------------------------------------------------------------------*/

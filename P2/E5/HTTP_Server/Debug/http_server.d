@@ -1,6 +1,8 @@
 .\debug\http_server.o: HTTP_Server.c
 .\debug\http_server.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\debug\http_server.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\debug\http_server.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\time.h
+.\debug\http_server.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\debug\http_server.o: main.h
 .\debug\http_server.o: C:\Users\prestamo\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.15.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h
 .\debug\http_server.o: .\RTE\Device\STM32F429ZITx\stm32f4xx_hal_conf.h

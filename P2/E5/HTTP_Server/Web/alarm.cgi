@@ -11,12 +11,12 @@ t <tr bgcolor=#aaccff>
 t  <th width=40%>Item</th>
 t  <th width=60%>Setting</th></tr>
 # Here begin data setting which is formatted in HTTP_CGI.C module
-t <tr><td><img src=pabb.gif>Hours</td>
-c j 1 <td><input type=text name=hours size=20 maxlength=2 value="%s"></td></tr>
+t <tr><td><img src=pabb.gif>Hours</TD>
+c j 1 <td><input type=text name=hours size=2 maxlength=2 value="%0.2s"></td></tr>
 t <tr><td><img src=pabb.gif>Minutes</TD>
-c j 2 <td><input type=text name=minutes size=20 maxlength=2 value="%s"></td></tr>
+c j 2 <td><input type=text name=minutes size=2 maxlength=2 value="%0.2s"></td></tr>
 t <tr><td><img src=pabb.gif>Seconds</TD>
-c j 3 <td><input type=text name=seconds size=20 maxlength=2 value="%s"></td></tr>
+c j 3 <td><input type=text name=seconds size=2 maxlength=2 value="%0.2s"></td></tr>
 t </font></table>
 # Here begin button definitions
 t <p align=center>

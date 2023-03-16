@@ -394,11 +394,6 @@
               <FilePath>.\HTTP_Server.c</FilePath>
             </File>
             <File>
-              <FileName>HTTP_Server_CGI.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\HTTP_Server_CGI.c</FilePath>
-            </File>
-            <File>
               <FileName>Web.c</FileName>
               <FileType>1</FileType>
               <FilePath>Web\Web.c</FilePath>
@@ -422,6 +417,11 @@
               <FileName>lcd.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\lcd.h</FilePath>
+            </File>
+            <File>
+              <FileName>HTTP_Server_CGI.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HTTP_Server_CGI.c</FilePath>
             </File>
             <File>
               <FileName>adc.c</FileName>

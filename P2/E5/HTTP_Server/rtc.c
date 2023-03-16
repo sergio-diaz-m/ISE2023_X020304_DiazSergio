@@ -40,8 +40,8 @@ static RTC_TimeTypeDef timeRTC;
 static RTC_DateTypeDef dateRTC;
 static RTC_TimeTypeDef currentTime;
 static RTC_DateTypeDef currentDate;
-static RTC_HandleTypeDef hrtc;
-static RTC_TypeDef rtc; 
+RTC_HandleTypeDef hrtc;
+RTC_TypeDef rtc; 
 
 char showtime[25];
 char showdate[25];
