@@ -110,7 +110,15 @@ void SNTP_ledsBlink(void){
 	}
 }
 //**************************************
-
+void alarm_ledsBlink(void){
+	uint8_t i;
+	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_14,GPIO_PIN_RESET);
+	for(i=0; i<30; i++){
+		HAL_GPIO_TogglePin(GPIOB,GPIO_PIN_7);
+		osDelay(100);
+	}
+}
 //*******ADC*************
 ADC_HandleTypeDef adchandle; //handler definition
 /* Read analog inputs */
@@ -206,6 +214,9 @@ static __NO_RETURN void BlinkLed (void *arg) {
 		if(osThreadFlagsWait(0x04,osFlagsWaitAny,0)==0x04){
 			SNTP_ledsBlink();
 		}
+		if(osThreadFlagsWait(0x100,osFlagsWaitAny,0)==0x100){
+			alarm_ledsBlink();
+		}
   }
 }
 
@@ -274,8 +285,7 @@ void RTC_Alarm_IRQHandler(void) {
   HAL_RTC_AlarmIRQHandler(&hrtc);
 }
 void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc){
-
-	
+	osThreadFlagsSet(TID_Led, 0x100);
 }
 
 ///*----------------------------------------------------------------------------
@@ -283,13 +293,9 @@ void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc){
 // *---------------------------------------------------------------------------*/
 static __NO_RETURN void Th_RTC (void *arg) {
 	//LCD init to display on screen
-
-
-	
 	LCD_reset();
   osDelay(50);
   LCD_init();
-	
 	
 	RTC_init();
 	
@@ -302,9 +308,12 @@ static __NO_RETURN void Th_RTC (void *arg) {
 		
 	 printTime();
 	 printDate();
-	 //Set clock refresh rate in ms
+	 //DeInit alarm if flag was set
+	 if(osThreadFlagsWait(0x100,osFlagsWaitAny,0)==0x100){
+		HAL_RTC_DeactivateAlarm(&hrtc,RTC_ALARM_A);
+	 }
+	 //Set clock refresh rate in ms and check for alarm set
    if(osThreadFlagsWait(0x10,osFlagsWaitAny,250)==0x10){
-//		 test=((alarm_h[0]-0x30)*10 +(alarm_h[1]-0x30));
 		sAlarm.AlarmTime.Hours = ((alarm_h[0]-0x30)*10 +(alarm_h[1]-0x30)) ;
 		sAlarm.AlarmTime.Minutes = (alarm_m[0]-0x30)*10 +(alarm_m[1]-0x30);
 		sAlarm.AlarmTime.Seconds = (alarm_s[0]-0x30)*10 +(alarm_s[1]-0x30);
@@ -337,7 +346,8 @@ __NO_RETURN void app_main (void *arg) {
 	
 	config_pin_usrbtn();
 	
-  netInitialize ();
+
+	
 	TID_Display = osThreadNew (Display,  NULL, NULL);
 	
 	//*********Inital screen print**********************
@@ -350,6 +360,8 @@ __NO_RETURN void app_main (void *arg) {
 	sprintf (buf, "IP4:%-16s",ip_ascii);
 	writeLCD(buf,2);
 	
+	
+	netInitialize ();
 	osDelay(5000);
 	flush_buffer();
 	//*********End of initial screen********************

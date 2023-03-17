@@ -1,9 +1,9 @@
 t <html><head><title>Alarm Control</title></head>
 i pg_header.inc
 t <h2 align=center><br>Alarm Control</h2>
-t <p><font size="2">This page allows you to change a message displayed on <b>LCD Module</b>.
-t  Simply enter the text which you want to display and click <b>Send</b>.<br><br>
-t  This Form uses a <b>POST</b> method to send data to a Web server.</font></p>
+t <p><font size="2">This page allows you to set an alarm that will repeat <b>every day</b>.
+t  Simply enter the time that you want the alarm to go off at and click <b>Set alarm</b>.<br><br>
+t  If you desire to <b>deactivate</b> the alarm, simply click <b>Alarm off</b> .</font></p>
 t <form action=alarm.cgi method=post name=cgi>
 t <input type=hidden value="alarm" name=pg>
 t <table border=0 width=99%><font size="3">
@@ -20,8 +20,8 @@ c j 3 <td><input type=text name=seconds size=2 maxlength=2 value="%0.2s"></td></
 t </font></table>
 # Here begin button definitions
 t <p align=center>
-t <input type=submit name=set value="Set" id="sbm">
-t <input type=reset value="Undo">
+t <input type=submit name=set value="Set alarm" id="sbm">
+t <input type=submit name=reset value="Alarm off">
 t </p></form>
 i pg_footer.inc
 . End of script must be closed with period.

@@ -32,6 +32,7 @@ extern int sntp_sel;
 extern char alarm_h [2] ;
 extern char alarm_m [2] ;
 extern char alarm_s [2] ;
+static uint8_t alarm_off;
 
 extern osThreadId_t TID_Display;
 extern osThreadId_t TID_Th_RTC;
@@ -56,6 +57,7 @@ void netCGI_ProcessQuery (const char *qstr) {
   netIF_Option opt = netIF_OptionMAC_Address;
   int16_t      typ = 0;
   char var[40];
+
 
   do {
     // Loop through all the parameters
@@ -114,7 +116,7 @@ void netCGI_ProcessQuery (const char *qstr) {
 //            - 5 = the same as 4, but with more XML data to follow.
 void netCGI_ProcessData (uint8_t code, const char *data, uint32_t len) {
   char var[40],passw[12];
-
+	
   if (code != 0) {
     // Ignore all other codes
     return;
@@ -188,8 +190,14 @@ void netCGI_ProcessData (uint8_t code, const char *data, uint32_t len) {
       else if (strncmp (var, "seconds=", strlen("seconds=")) == 0) {
         // seconds text
                 strcpy (alarm_s, var+strlen("seconds="));
-                
+				             
       }
+      else if (strncmp (var, "reset=Alarm off", strlen("reset=Alarm off")) == 0) { //alarm reset
+								alarm_off=1;
+                strcpy (alarm_h, "00");
+								strcpy (alarm_m, "00");
+								strcpy (alarm_s, "00");
+			}
     }
   } while (data);
     LED_Toggle(P2);
@@ -412,7 +420,14 @@ uint32_t netCGI_Script (const char *env, char *buf, uint32_t buflen, uint32_t *p
           break;
 				case '3':
                   len = (uint32_t)sprintf (buf, &env[4], alarm_s);
-								  osThreadFlagsSet (TID_Th_RTC, 0x10);
+									
+									if(alarm_off){
+										alarm_off=0;
+										osThreadFlagsSet (TID_Th_RTC, 0x100);	//Alarm deactivated		
+									}
+									else{
+										osThreadFlagsSet (TID_Th_RTC, 0x10);//Alarm on
+									}
           break;
       }
       break;
