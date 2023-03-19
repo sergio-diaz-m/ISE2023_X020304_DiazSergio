@@ -390,7 +390,7 @@ uint32_t netCGI_Script (const char *env, char *buf, uint32_t buflen, uint32_t *p
       break;
 			
 			case 'h':
-      // AD Input from 'ad.cgi'
+      // Time Input from 'time.cgi'
       switch (env[2]) {
         case '1':
           len = sprintf (buf, &env[4], showtime);
@@ -431,6 +431,7 @@ uint32_t netCGI_Script (const char *env, char *buf, uint32_t buflen, uint32_t *p
           break;
       }
       break;
+			
     case 'x':
       // AD Input from 'ad.cgx'
       adv = AD_in (0);

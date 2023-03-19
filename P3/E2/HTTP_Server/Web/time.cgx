@@ -1,0 +1,9 @@
+t <form>
+t <text>
+t <id>time_value</id>
+c h 1 <value>%s</value>
+t <id>date_value</id>
+c h 2 <value>%s</value>
+t </text>
+t </form>
+.

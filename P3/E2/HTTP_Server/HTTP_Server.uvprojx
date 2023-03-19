@@ -559,6 +559,11 @@
               <FilePath>.\Web\pabb.gif</FilePath>
             </File>
             <File>
+              <FileName>time.cgx</FileName>
+              <FileType>9</FileType>
+              <FilePath>.\Web\time.cgx</FilePath>
+            </File>
+            <File>
               <FileName>time.cgi</FileName>
               <FileType>9</FileType>
               <FilePath>.\Web\time.cgi</FilePath>
