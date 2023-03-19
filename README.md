@@ -4,7 +4,7 @@
 ## P1) Practica 1
     -E1: LEDs control from compact web.
     -E2: LCD control from compact web.
-    -E3:  ADC value displayed on compact web.
+    -E3: ADC value displayed on compact web.
 ## P2)
     -E1: RTC displayed on compact web and periodic alarm coded.
     -E2: RTC library (not final version) .
